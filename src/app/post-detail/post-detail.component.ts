@@ -7,19 +7,18 @@ import { RouterModule } from '@angular/router';
   selector: 'app-post-detail',
   imports: [RouterModule],
   templateUrl: './post-detail.component.html',
-  styleUrl: './post-detail.component.css'
+  styleUrl: './post-detail.component.css',
 })
 export class PostDetailComponent {
-
-  id = input.required<number>()
+  id = input.required<number>();
 
   dataService = inject(DataService);
 
-  post!: Post
-  
-  ngOnInit(){ 
-    this.post = this.dataService.getPostById(this.id());
+  post!: Post;
+
+  ngOnInit() {
+    this.dataService.getPostById(this.id()).subscribe((data: Post[]) => {
+      this.post = data[0];
+    });
   }
 }
-
-
